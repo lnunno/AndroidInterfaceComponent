@@ -6,6 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.AttributeSet;
+import android.util.FloatMath;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -82,10 +83,8 @@ public class MotionListView extends ListView implements SensorEventListener {
             // Do an update.
             lastUpdate = curTimeMillis;
 
-            float speed = Math.abs(
-                    Math.abs(x) + Math.abs(y) + Math.abs(z)
-                            - (Math.abs(last_x) + Math.abs(last_y) + Math.abs(last_z))
-            ) / timeDelta * 1000;
+            float euclidDistance = FloatMath.sqrt(FloatMath.pow(x - last_x, 2) + FloatMath.pow(y - last_y, 2) + FloatMath.pow(z - last_z, 2));
+            float speed = euclidDistance / timeDelta * 1000;
 
             Log.d("SPEED", "speed=" + speed);
 
