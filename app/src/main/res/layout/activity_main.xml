@@ -11,10 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></com.lnunno.interfacecomponent.MotionListView>-->
 
-    <ListView
+    <com.lnunno.interfacecomponent.MotionListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:entries="@array/test_string_array">
-
-        </ListView>
+        android:entries="@array/test_string_array"></com.lnunno.interfacecomponent.MotionListView>
 </RelativeLayout>
