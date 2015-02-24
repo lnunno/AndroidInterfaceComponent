@@ -61,7 +61,6 @@ public class MotionListView extends ListView implements SensorEventListener {
 
     /**
      * How often movement detection is refreshed.
-     * <p/>
      * Need a delay to detect bigger movements.
      */
     private static final int UPDATE_INTERVAL_MILLIS = 100;
