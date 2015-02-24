@@ -7,12 +7,8 @@
 
 
     <!-- My custom interface component. -->
-    <!--<com.lnunno.interfacecomponent.MotionListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></com.lnunno.interfacecomponent.MotionListView>-->
-
     <com.lnunno.interfacecomponent.MotionListView
+        android:id="@+id/motion_list_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/test_string_array"></com.lnunno.interfacecomponent.MotionListView>
+        android:layout_height="wrap_content"></com.lnunno.interfacecomponent.MotionListView>
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.lnunno.interfacecomponent;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,6 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -16,7 +22,14 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("INIT","Main Activity Created");
+        Resources res = getResources();
+        ArrayList<String> lst = new ArrayList<>();
+        String[] test_strings = res.getStringArray(R.array.test_string_array);
+        lst.addAll(Arrays.asList(test_strings));
+        MotionListView motionListView = (MotionListView) findViewById(R.id.motion_list_view);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lst);
+        motionListView.setAdapter(adapter);
+        Log.i("INIT", "Main Activity Created");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }

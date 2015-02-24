@@ -8,7 +8,13 @@ import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Lucas on 2/3/2015.
@@ -91,6 +97,7 @@ public class MotionListView extends ListView implements SensorEventListener {
             if (speed > SHAKE_THRESHOLD) {
                 // The phone was shook!
                 Log.i("SHAKE", "Phone was shook!");
+                this.doShakeAction();
             }
 
             last_x = x;
@@ -99,6 +106,23 @@ public class MotionListView extends ListView implements SensorEventListener {
         } else {
             return;
         }
+    }
+
+    /**
+     * This is called when a shake is registered. By default, it shuffles the items in the list.
+     */
+    private void doShakeAction() {
+        List<Object> listItems = new ArrayList<>();
+        ArrayAdapter adapter = (ArrayAdapter) this.getAdapter(); // Allows us to do actions on the list.
+        for (int i = 0; i < adapter.getCount(); i++) {
+            Object item = adapter.getItem(i);
+            listItems.add(item);
+        }
+        Collections.shuffle(listItems); // Shuffle the elements.
+
+        // Add the list as the items in the ListView.
+        adapter.clear();
+        adapter.addAll(listItems);
     }
 
     private void initializeSensor(){
