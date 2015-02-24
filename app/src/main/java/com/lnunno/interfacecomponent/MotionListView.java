@@ -39,7 +39,7 @@ public class MotionListView extends ListView implements SensorEventListener {
 
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
-    private static final int RESET_Y_THRESHOLD = 1000;
+    private static final int RESET_Y_THRESHOLD = 5;
     private static final int SHAKE_THRESHOLD = 60;
     private static final int UPDATE_INTERVAL_MILLIS = 100;
 
