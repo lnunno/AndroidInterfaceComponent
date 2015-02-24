@@ -22,6 +22,12 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Initial setup.
+        Log.i("INIT", "Main Activity Created");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Populate list from the strings.xml file.
         Resources res = getResources();
         ArrayList<String> lst = new ArrayList<>();
         String[] test_strings = res.getStringArray(R.array.test_string_array);
@@ -29,9 +35,6 @@ public class MainActivity extends ActionBarActivity {
         MotionListView motionListView = (MotionListView) findViewById(R.id.motion_list_view);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lst);
         motionListView.setAdapter(adapter);
-        Log.i("INIT", "Main Activity Created");
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
     }
 
 

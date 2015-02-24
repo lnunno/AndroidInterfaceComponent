@@ -17,6 +17,12 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Caveats:
+ *
+ * <ul>
+ *     <li>The items in the Adapter of the MotionListView <b>must</b> be Comparable.
+ *     Some runtime casts are made internally.</li>
+ * </ul>
  * Created by Lucas on 2/3/2015.
  *
  * References:
@@ -33,6 +39,7 @@ public class MotionListView extends ListView implements SensorEventListener {
 
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
+    private static final int RESET_Y_THRESHOLD = 1000;
     private static final int SHAKE_THRESHOLD = 60;
     private static final int UPDATE_INTERVAL_MILLIS = 100;
 
@@ -91,10 +98,14 @@ public class MotionListView extends ListView implements SensorEventListener {
 
             float euclidDistance = FloatMath.sqrt(FloatMath.pow(x - last_x, 2) + FloatMath.pow(y - last_y, 2) + FloatMath.pow(z - last_z, 2));
             float speed = euclidDistance / timeDelta * 1000;
+            float y_delta = last_y - y;
 
             Log.d("SPEED", "speed=" + speed);
+            Log.d("Y_DELTA", "y_delta=" + y_delta);
 
-            if (speed > SHAKE_THRESHOLD) {
+            if (y_delta > RESET_Y_THRESHOLD) {
+                this.doVerticalAction();
+            } else if (speed > SHAKE_THRESHOLD) {
                 // The phone was shook!
                 Log.i("SHAKE", "Phone was shook!");
                 this.doShakeAction();
@@ -109,16 +120,41 @@ public class MotionListView extends ListView implements SensorEventListener {
     }
 
     /**
+     *
+     * @param adapter The adapter to get the items from.
+     * @return A list of all items in the adapter.
+     */
+    private List<Comparable> getAllAdapterItems(ArrayAdapter adapter) {
+        List<Comparable> listItems = new ArrayList<>();
+        for (int i = 0; i < adapter.getCount(); i++) {
+            Comparable item = (Comparable) adapter.getItem(i);
+            listItems.add(item);
+        }
+        return listItems;
+    }
+
+    /**
      * This is called when a shake is registered. By default, it shuffles the items in the list.
      */
     private void doShakeAction() {
-        List<Object> listItems = new ArrayList<>();
-        ArrayAdapter adapter = (ArrayAdapter) this.getAdapter(); // Allows us to do actions on the list.
-        for (int i = 0; i < adapter.getCount(); i++) {
-            Object item = adapter.getItem(i);
-            listItems.add(item);
-        }
+        ArrayAdapter adapter = (ArrayAdapter) this.getAdapter();
+        List<Comparable> listItems = this.getAllAdapterItems(adapter);
+
         Collections.shuffle(listItems); // Shuffle the elements.
+
+        // Add the list as the items in the ListView.
+        adapter.clear();
+        adapter.addAll(listItems);
+    }
+
+    /**
+     * Perform an action when the phone is moved straight up.
+     */
+    private void doVerticalAction() {
+        ArrayAdapter adapter = (ArrayAdapter) this.getAdapter();
+        List<Comparable> listItems = this.getAllAdapterItems(adapter);
+
+        Collections.sort(listItems);
 
         // Add the list as the items in the ListView.
         adapter.clear();
