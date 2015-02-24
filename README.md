@@ -11,5 +11,15 @@ the associated Android Studio project.
 * Shaking the device shuffles the list.
 * Moving the device up rapidly sorts the list.
 
+## Customization
+The following variables can be tweaked in the [MotionListView](https://github.com/lnunno/AndroidInterfaceComponent/blob/master/app/src/main/java/com/lnunno/interfacecomponent/MotionListView.java) class to change the sensitivity of the shake, tilt, and "lift" gestures. These numbers were determined from readings observed from a Samsung Galaxy S5 accelerometer and might need to be adjusted to be more general.
+
+* `RESET_Y_THRESHOLD`: Threshold for "up" sort detection.
+* `POS_Z_TILT_THRESHOLD`: Threshold to detect a forward tilt for scrolling.
+* `NEG_Z_TILT_THRESHOLD`: Threshold to detect an away tilt for scrolling.
+* `SHAKE_THRESHOLD`: Force needed for a shake.
+* `UPDATE_INTERVAL_MILLIS`: How often movement detection is refreshed. Need a delay to detect bigger movements.
+* `SCROLL_SENSITIVITY`: How much scrolling is done on tilt.
+
 ## Caveats
 * This list must be used with `Comparable` elements, otherwise there will be a runtime error.
