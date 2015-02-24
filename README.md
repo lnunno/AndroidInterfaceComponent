@@ -8,8 +8,10 @@ Please see the [MotionListView.java](https://github.com/lnunno/AndroidInterfaceC
 the associated Android Studio project.
 
 ## Features
-* Shaking the device shuffles the list.
-* Moving the device up rapidly sorts the list.
+* *Shaking* the device **shuffles** the list.
+* Moving the device *up* rapidly **sorts** the list.
+* Tilting the device *forward* scrolls the list **down**.
+* Tilting the device *backward* scrolls the list **up**.
 
 ## Customization
 The following variables can be tweaked in the [MotionListView](https://github.com/lnunno/AndroidInterfaceComponent/blob/master/app/src/main/java/com/lnunno/interfacecomponent/MotionListView.java) class to change the sensitivity of the shake, tilt, and "lift" gestures. These numbers were determined from readings observed from a Samsung Galaxy S5 accelerometer and might need to be adjusted to be more general.
