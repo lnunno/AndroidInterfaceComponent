@@ -15,6 +15,7 @@ the associated Android Studio project.
 
 ## Video Demo
 [Click here for a YouTube video demo.](http://youtu.be/16Shkz2pT6k)
+
 ![Video thumbnail](http://img.youtube.com/vi/16Shkz2pT6k/0.jpg)
 
 ## Customization
