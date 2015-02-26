@@ -13,6 +13,10 @@ the associated Android Studio project.
 * Tilting the device *forward* scrolls the list **down**.
 * Tilting the device *backward* scrolls the list **up**.
 
+## Video Demo
+[Click here for a YouTube video demo.](http://youtu.be/16Shkz2pT6k)
+![Video thumbnail](http://img.youtube.com/vi/16Shkz2pT6k/0.jpg)
+
 ## Customization
 The following variables can be tweaked in the [MotionListView](https://github.com/lnunno/AndroidInterfaceComponent/blob/master/app/src/main/java/com/lnunno/interfacecomponent/MotionListView.java) class to change the sensitivity of the shake, tilt, and "lift" gestures. These numbers were determined from readings observed from a Samsung Galaxy S5 accelerometer and might need to be adjusted to be more general.
 
